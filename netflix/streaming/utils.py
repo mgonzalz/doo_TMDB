@@ -26,3 +26,11 @@ def fetch_movies():
     endpoint = 'movie/popular'
     response = fetch_data_from_api(endpoint)
     return response.get('results', [])
+
+def fetch_tv_shows():
+    """
+    Obtiene una lista de series populares desde el endpoint 'tv/popular' sin paginación.
+    """
+    endpoint = 'tv/popular'
+    response = fetch_data_from_api(endpoint)
+    return response.get('results', [])
