@@ -40,9 +40,11 @@ INSTALLED_APPS = [
 
     # Local apps.
     "streaming",
+    "authentication",
 
     # Third-party apps.
     "rest_framework", # Django REST framework - Nice clean views for API.
+    "rest_framework.authtoken", # Token-based authentication - Authentication token for API.
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Custom user model.
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.APIKeyAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
