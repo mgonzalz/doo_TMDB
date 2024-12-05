@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
+from .utils import *
 # Create your views here.
 
 ## Vista basada a través de plantillas.
@@ -28,3 +29,19 @@ class TVShowListView(APIView):
         tv_shows = TVShow.objects.all()
         serializer = TVShowSerializer(tv_shows, many=True)
         return Response(serializer.data)
+
+
+## Vista basada a través de JSON.
+def movie_list_json(request):
+    try:
+        data = fetch_movies()
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+def tv_show_list_json(request):
+    try:
+        data = fetch_tv_shows()
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
