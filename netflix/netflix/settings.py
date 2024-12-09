@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Local apps.
     "streaming",
+    "authentication",
 
     # Third-party apps.
     "rest_framework", # Django REST framework - Nice clean views for API.
@@ -123,7 +124,26 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
+# Media files (User uploaded files)
+# https://docs.djangoproject.com/en/5.1/topics/files/
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Django REST framework settings.
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
