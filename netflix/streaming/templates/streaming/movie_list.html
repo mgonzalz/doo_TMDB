@@ -1,18 +1,44 @@
 {% extends 'streaming/base.html' %}
-{% load static %}
+{%load static%}
 {% block title %}Lista de Películas{% endblock %}
 
 {% block content %}
 <h1>Lista de Películas</h1>
+
+{% if request.user.is_authenticated %}
+<h2>Mi Lista</h2>
+<ul>
+    {% for movie in movies %}
+        {% if movie.id in favorite_movie_ids %}
+        <li>
+            <h3>{{ movie.title }}</h3>
+            <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="200">
+            <p>{{ movie.description }}</p>
+            <a href="{% url 'toggle_favorite_movie' movie.id %}">Quitar de Mi Lista</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>Todas las Películas</h2>
 <ul>
     {% for movie in movies %}
     <li>
-        <h2>{{ movie.title }}</h2>
+        <h3>{{ movie.title }}</h3>
         <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="200">
         <p>{{ movie.description }}</p>
-        <p>Fecha de Estreno: {{ movie.release_date }}</p>
-        <p>Calificación: {{ movie.vote_average }}</p>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'toggle_favorite_movie' movie.id %}">
+            {% if movie.id in favorite_movie_ids %}
+                Quitar de Mi Lista
+            {% else %}
+                Añadir a Mi Lista
+            {% endif %}
+        </a>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
 {% endblock %}
+

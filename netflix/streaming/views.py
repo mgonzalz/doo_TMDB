@@ -1,21 +1,52 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from .utils import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 ## Vista basada a través de plantillas.
 def movie_list(request):
     movies = Movie.objects.all()
-    return render(request, "streaming/movie_list.html", {"movies": movies})
-
+    favorite_movie_ids = []
+    if request.user.is_authenticated:
+        favorite_movie_ids = Playlist.objects.filter(user=request.user, movie__isnull=False).values_list('movie_id', flat=True)
+    
+    return render(request, 'streaming/movie_list.html', {
+        'movies': movies,
+        'favorite_movie_ids': favorite_movie_ids,
+    })
 def tv_show_list(request):
     tv_shows = TVShow.objects.all()
-    return render(request, "streaming/tv_show_list.html", {"tv_shows": tv_shows})
+    favorite_tvshow_ids = []
+    if request.user.is_authenticated:
+        favorite_tvshow_ids = Playlist.objects.filter(user=request.user, tv_show__isnull=False).values_list('tv_show_id', flat=True)
+    
+    return render(request, 'streaming/tv_show_list.html', {
+        'tv_shows': tv_shows,
+        'favorite_tvshow_ids': favorite_tvshow_ids,
+    })
 
+
+@login_required
+def toggle_favorite_movie(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    favorite, created = Playlist.objects.get_or_create(user=request.user, movie=movie)
+    if not created:
+        favorite.delete()  # Eliminar de favoritos si ya estaba en la lista
+    return redirect('movie_list')
+
+@login_required
+@login_required
+def toggle_favorite_tvshow(request, tv_show_id):
+    tv_show = TVShow.objects.get(id=tv_show_id)
+    favorite, created = Playlist.objects.get_or_create(user=request.user, tv_show=tv_show)
+    if not created:
+        favorite.delete()  # Eliminar de favoritos si ya estaba en la lista
+    return redirect('tv_show_list')
 
 ## Vista basada a través de API Rest - obtiene un JSON.
 class MovieListView(APIView):
