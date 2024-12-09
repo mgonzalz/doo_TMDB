@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Series</title>
-</head>
-<body>
-    <h1>Series Populares</h1>
-    <ul>
-        {% for show in tv_shows %}
-        <li>
-            <h2>{{ show.title }}</h2>
-            <img src="{{ show.poster_path }}" alt="{{ show.title }}" width="200">
-            <p>{{ show.description }}</p>
-            <p>Primera emisión: {{ show.release_date }}</p>
-            <p>Calificación: {{ show.vote_average }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'streaming/base.html' %}
+{% load static %}
+{% block title %}Lista de Series{% endblock %}
+
+{% block content %}
+<h1>Series Populares</h1>
+<ul>
+    {% for show in tv_shows %}
+    <li>
+        <h2>{{ show.title }}</h2>
+        <img src="{{ show.poster_path }}" alt="{{ show.title }}" width="200">
+        <p>{{ show.description }}</p>
+        <p>Primera emisión: {{ show.release_date }}</p>
+        <p>Calificación: {{ show.vote_average }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

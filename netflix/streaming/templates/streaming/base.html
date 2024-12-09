@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}App de Películas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'streaming/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'movie_list' %}">Películas</a></li>
+                <li><a href="{% url 'tv_show_list' %}">Series</a></li>
+                <li><a href="{% url 'edit_profile' %}">Perfil</a></li>
+                <!--<li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>-->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 App de Películas</p>
+    </footer>
+</body>
+</html>

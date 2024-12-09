@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
-</head>
-<body>
-    <h1>Movie List</h1>
-    <ul>
-        {% for movie in movies %}
-        <li>
-            <h2>{{ movie.title }}</h2>
-            <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="200">
-            <p>{{ movie.description }}</p>
-            <p>Release Date: {{ movie.release_date }}</p>
-            <p>Vote Average: {{ movie.vote_average }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'streaming/base.html' %}
+{% load static %}
+{% block title %}Lista de Películas{% endblock %}
+
+{% block content %}
+<h1>Lista de Películas</h1>
+<ul>
+    {% for movie in movies %}
+    <li>
+        <h2>{{ movie.title }}</h2>
+        <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="200">
+        <p>{{ movie.description }}</p>
+        <p>Fecha de Estreno: {{ movie.release_date }}</p>
+        <p>Calificación: {{ movie.vote_average }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

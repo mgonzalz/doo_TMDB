@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from .serializers import UserSerializer
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -51,6 +51,7 @@ def login_view(request):
 
     return render(request, 'authentication/login.html')
 
+@login_required
 def edit_profile(request):
     """Vista para editar avatar y fecha de nacimiento."""
     profile = request.user.profile
@@ -64,6 +65,12 @@ def edit_profile(request):
         status = 'ok'  # Cambios realizados.
 
     return render(request, 'authentication/edit_profile.html', {'profile': profile, 'status': status})
+
+@login_required
+def logout_view(request):
+    """Cierra la sesión del usuario."""
+    logout(request)
+    return redirect('login')
 
 ## Vista basada a través de API Rest - obtiene un JSON.
 class UserProfileView(APIView):
