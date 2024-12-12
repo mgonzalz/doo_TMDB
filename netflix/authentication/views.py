@@ -45,7 +45,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             # Redirigir al perfil para completar los datos faltantes.
-            return redirect('edit-profile')
+            return redirect('edit_profile')
         else:
             return render(request, 'authentication/login.html', {'error': 'Credenciales incorrectas'})
 
