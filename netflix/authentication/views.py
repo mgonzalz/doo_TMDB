@@ -33,7 +33,7 @@ def register(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)  # Iniciar sesión automáticamente tras el registro.
 
-        return redirect('edit-profile')
+        return redirect('edit_profile')
 
     return render(request, 'authentication/register.html')
 

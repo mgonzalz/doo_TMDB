@@ -1,88 +1,118 @@
 {% extends 'streaming/base.html' %}
 {% load static %}
+
 {% block title %}Lista de Series{% endblock %}
 
 {% block content %}
-<h1>Series</h1>
+<main class="movie-list-container">
+    <h1 class="section-title">Series</h1>
 
-<!-- Mi Lista -->
-{% if request.user.is_authenticated %}
-<h2>Mi Lista</h2>
-<ul>
-    {% for tv_show in tv_shows %}
-        {% if tv_show.id in favorite_tvshow_ids %}
-        <li>
-            <h3>{{ tv_show.title }}</h3>
-            <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}" width="200">
-            <p>{{ tv_show.description }}</p>
-            <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}">Quitar de Mi Lista</a>
-        </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-{% endif %}
+    <!-- Mi Lista -->
+    {% if request.user.is_authenticated and favorite_tvshow_ids %}
+    <section class="movie-section">
+        <h2>Mi Lista</h2>
+        <div class="carousel-container" id="mi-lista-container">
+            <button class="carousel-prev hidden" onclick="scrollCarousel('mi-lista', -1)" id="mi-lista-prev">&#10094;</button>
+            <div class="carousel" id="mi-lista">
+                {% for tv_show in tv_shows %}
+                    {% if tv_show.id in favorite_tvshow_ids %}
+                    <div class="movie-card">
+                        <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                        <div class="overlay">
+                            <p>{{ tv_show.title }}</p>
+                            <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">Quitar de Mi Lista</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-next hidden" onclick="scrollCarousel('mi-lista', 1)" id="mi-lista-next">&#10095;</button>
+        </div>
+    </section>
+    {% endif %}
 
-<!-- Top 10 Series -->
-<h2>Top 10 Series</h2>
-<ul>
-    {% for tv_show in top_tvshows %}
-    <li>
-        <h3>{{ tv_show.title }}</h3>
-        <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}" width="200">
-        <p>{{ tv_show.description }}</p>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}">
-            {% if tv_show.id in favorite_tvshow_ids %}
-                Quitar de Mi Lista
-            {% else %}
-                Añadir a Mi Lista
-            {% endif %}
-        </a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+    <!-- Top 10 Series -->
+    <section class="movie-section">
+        <h2>Top 10 Series</h2>
+        <div class="carousel-container" id="top10-container">
+            <button class="carousel-prev" onclick="scrollCarousel('top10', -1)" id="top10-prev">&#10094;</button>
+            <div class="carousel" id="top10">
+                {% for tv_show in top_tvshows %}
+                <div class="movie-card top10-card">
+                    <div class="rank">{{ forloop.counter }}</div>
+                    <div class="rank-overlay"></div>
+                    <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    <div class="overlay">
+                        <p>{{ tv_show.title }}</p>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">
+                            {% if tv_show.id in favorite_tvshow_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-next" onclick="scrollCarousel('top10', 1)" id="top10-next">&#10095;</button>
+        </div>
+    </section>
 
-<!-- Novedades -->
-<h2>Novedades</h2>
-<ul>
-    {% for tv_show in new_tvshows %}
-    <li>
-        <h3>{{ tv_show.title }}</h3>
-        <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}" width="200">
-        <p>{{ tv_show.description }}</p>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}">
-            {% if tv_show.id in favorite_tvshow_ids %}
-                Quitar de Mi Lista
-            {% else %}
-                Añadir a Mi Lista
-            {% endif %}
-        </a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+    <!-- Novedades -->
+    <section class="movie-section">
+        <h2>Novedades</h2>
+        <div class="carousel-container">
+            <button class="carousel-prev" onclick="scrollCarousel('novedades', -1)" id="novedades-prev">&#10094;</button>
+            <div class="carousel" id="novedades">
+                {% for tv_show in new_tvshows %}
+                <div class="movie-card">
+                    <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    <div class="overlay">
+                        <p>{{ tv_show.title }}</p>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">
+                            {% if tv_show.id in favorite_tvshow_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-next" onclick="scrollCarousel('novedades', 1)" id="novedades-next">&#10095;</button>
+        </div>
+    </section>
 
-<!-- Todas las Series -->
-<h2>Todas las Series</h2>
-<ul>
-    {% for tv_show in tv_shows %}
-    <li>
-        <h3>{{ tv_show.title }}</h3>
-        <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}" width="200">
-        <p>{{ tv_show.description }}</p>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}">
-            {% if tv_show.id in favorite_tvshow_ids %}
-                Quitar de Mi Lista
-            {% else %}
-                Añadir a Mi Lista
-            {% endif %}
-        </a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+    <!-- Todas las Series -->
+    <section class="movie-section">
+        <h2>Todas las Series</h2>
+        <div class="movie-grid-4">
+            {% for tv_show in tv_shows %}
+            <div class="movie-card">
+                <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                <div class="overlay">
+                    <p>{{ tv_show.title }}</p>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">
+                        {% if tv_show.id in favorite_tvshow_ids %}
+                            Quitar de Mi Lista
+                        {% else %}
+                            Añadir a Mi Lista
+                        {% endif %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
 
+<script src="{% static 'streaming/js/carousel.js' %}"></script>
 {% endblock %}
