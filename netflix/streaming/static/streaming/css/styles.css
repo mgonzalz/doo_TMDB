@@ -1,10 +1,41 @@
+/*Carga de las fuentes*/
+@font-face {
+    font-family: 'NetflixSans';
+    src: url('../fonts/NetflixSans-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'NetflixSans';
+    src: url('../fonts/NetflixSans-Regular.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NetflixSans';
+    src: url('../fonts/NetflixSans-Regular.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NetflixSans';
+    src: url('../fonts/NetflixSans-Regular.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'NetflixSans';
     background-color: #1a1a1a;
     color: #ffffff;
     margin: 0;
     padding: 0;
 }
+
 
 header nav {
     background-color: #000;
