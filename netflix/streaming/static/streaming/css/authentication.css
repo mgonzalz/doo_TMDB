@@ -1,4 +1,7 @@
-.password-form {
+/* Form Containers */
+.password-form,
+.register-form,
+.login-form {
     max-width: 500px;
     margin: 0 auto;
     background-color: #222;
@@ -7,6 +10,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Form Groups */
 .form-group {
     margin-bottom: 15px;
 }
@@ -26,10 +30,12 @@
     color: white;
 }
 
+/* Form Actions */
 .form-actions {
     text-align: center;
 }
 
+/* Buttons */
 .btn {
     padding: 10px 20px;
     background-color: #ff3d3d;
@@ -45,6 +51,7 @@
     background-color: #e63232;
 }
 
+/* Links */
 .profile-links {
     text-align: center;
     margin-top: 20px;
@@ -60,6 +67,7 @@
     text-decoration: underline;
 }
 
+/* Messages */
 .error-message {
     color: #ff3d3d;
     text-align: center;
