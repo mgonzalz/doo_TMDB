@@ -12,22 +12,35 @@ from django.contrib.auth.decorators import login_required
 def movie_list(request):
     movies = Movie.objects.all()
     favorite_movie_ids = []
+    # Top 10 películas con mejor calificación
+    top_movies = Movie.objects.order_by('-vote_average')[:10]
+    # Últimas 10 películas basadas en la fecha de lanzamiento
+    new_movies = Movie.objects.order_by('-release_date')[:10]
     if request.user.is_authenticated:
         favorite_movie_ids = Playlist.objects.filter(user=request.user, movie__isnull=False).values_list('movie_id', flat=True)
     
     return render(request, 'streaming/movie_list.html', {
         'movies': movies,
         'favorite_movie_ids': favorite_movie_ids,
+        'top_movies': top_movies,
+        'new_movies': new_movies,
     })
 def tv_show_list(request):
     tv_shows = TVShow.objects.all()
     favorite_tvshow_ids = []
+    # Top 10 series con mejor calificación
+    top_tvshows = TVShow.objects.order_by('-vote_average')[:10]
+    # Últimas 10 series basadas en la fecha de lanzamiento
+    new_tvshows = TVShow.objects.order_by('-release_date')[:10]
+
     if request.user.is_authenticated:
         favorite_tvshow_ids = Playlist.objects.filter(user=request.user, tv_show__isnull=False).values_list('tv_show_id', flat=True)
     
     return render(request, 'streaming/tv_show_list.html', {
         'tv_shows': tv_shows,
         'favorite_tvshow_ids': favorite_tvshow_ids,
+        'top_tvshows': top_tvshows,
+        'new_tvshows': new_tvshows,
     })
 
 
