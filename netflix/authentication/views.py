@@ -7,6 +7,8 @@ from .serializers import UserSerializer
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+
 
 # Create your views here.
 
@@ -71,6 +73,27 @@ def logout_view(request):
     """Cierra la sesión del usuario."""
     logout(request)
     return redirect('login')
+
+@login_required
+def change_password(request):
+    """Vista para cambiar la contraseña del usuario."""
+    status = None
+
+    if request.method == 'POST':
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if not check_password(current_password, request.user.password):
+            status = 'error'
+        elif new_password != confirm_password:
+            status = 'error'
+        else:
+            request.user.set_password(new_password)
+            request.user.save()
+            login(request, request.user)
+            status = 'ok'
+    return render(request, 'authentication/change_password.html', {'status': status})
 
 ## Vista basada a través de API Rest - obtiene un JSON.
 class UserProfileView(APIView):
