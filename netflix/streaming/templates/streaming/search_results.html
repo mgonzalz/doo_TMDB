@@ -1,0 +1,48 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<main class="movie-list-container">
+    <h1 class="section-title">Search Results</h1>
+
+    {% if query %}
+        <p class="search-query">Results for: <strong>{{ query }}</strong></p>
+        {% if movies or tv_shows %}
+
+        <section class="movie-section">
+            <h2>Movies</h2>
+            <div class="movie-grid-4">
+                {% for movie in movies %}
+                <div class="movie-card">
+                    <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="overlay">
+                        <p>{{ movie.title }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="movie-section">
+            <h2>TV Shows</h2>
+            <div class="movie-grid-4">
+                {% for tv_show in tv_shows %}
+                <div class="movie-card">
+                    <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    <div class="overlay">
+                        <p>{{ tv_show.title }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        {% else %}
+        <p class="no-results">No results found for your query.</p>
+        {% endif %}
+    {% else %}
+        <p class="no-query">Please enter a search term.</p>
+    {% endif %}
+</main>
+{% endblock %}

@@ -16,8 +16,10 @@
                 <a href="#" class="{% if request.resolver_match.url_name == 'country' %}active{% endif %}">Country</a>
             </div>
             <div class="search">
-                <input type="text" placeholder="Search movies...">
-                <button>🔍</button>
+                <form action="{% url 'search_results' %}" method="get">
+                    <input type="text" name="q" placeholder="Search movies or series...">
+                    <button type="submit">🔍</button>
+                </form>
             </div>
             <div>
                 <a href="{% url 'movie_list' %}" class="{% if request.resolver_match.url_name == 'movie_list' %}active{% endif %}">Movies</a>

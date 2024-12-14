@@ -4,6 +4,8 @@ from . import views
 # Create your urls here.
 urlpatterns = [
     path('', views.home, name='home'),
+    path('search/', views.search_results, name='search_results'),
+
     path('movies/', views.movie_list, name='movie_list'),
     path('favorite-movie/<int:movie_id>/', views.toggle_favorite_movie, name='toggle_favorite_movie'),
     # Endpoints para Movies
