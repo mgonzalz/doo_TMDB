@@ -1,0 +1,114 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<main class="movie-list-container">
+    <h1 class="section-title">Inicio</h1>
+
+    <!-- Mi Lista Combinada -->
+    {% if request.user.is_authenticated %}
+    <section class="movie-section">
+        <h2>Mi Lista</h2>
+        <div class="carousel-container" id="mi-lista-container">
+            <button class="carousel-prev hidden" onclick="scrollCarousel('mi-lista', -1)" id="mi-lista-prev">&#10094;</button>
+            <div class="carousel" id="mi-lista">
+                {% for item in my_list %}
+                <div class="movie-card">
+                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <div class="overlay">
+                        <p>{{ item.title }}</p>
+                        <a href="{% url 'toggle_favorite_movie' item.id %}" class="favorited">Quitar de Mi Lista</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-next hidden" onclick="scrollCarousel('mi-lista', 1)" id="mi-lista-next">&#10095;</button>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Top 10 Combinado -->
+    <section class="movie-section">
+        <h2>Top 10 Películas y Series</h2>
+        <div class="carousel-container" id="top10-container">
+            <button class="carousel-prev" onclick="scrollCarousel('top10', -1)" id="top10-prev">&#10094;</button>
+            <div class="carousel" id="top10">
+                {% for item in top_combined %}
+                <div class="movie-card top10-card">
+                    <div class="rank">{{ forloop.counter }}</div>
+                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <div class="overlay">
+                        <p>{{ item.title }}</p>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_movie' item.id %}" {% if item.id in favorite_ids %}class="favorited"{% endif %}>
+                            {% if item.id in favorite_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-next" onclick="scrollCarousel('top10', 1)" id="top10-next">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Novedades Combinadas -->
+    <section class="movie-section">
+        <h2>Novedades</h2>
+        <div class="carousel-container" id="novedades-container">
+            <button class="carousel-prev" onclick="scrollCarousel('novedades', -1)" id="novedades-prev">&#10094;</button>
+            <div class="carousel" id="novedades">
+                {% for item in new_combined %}
+                <div class="movie-card">
+                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <div class="overlay">
+                        <p>{{ item.title }}</p>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_movie' item.id %}" {% if item.id in favorite_ids %}class="favorited"{% endif %}>
+                            {% if item.id in favorite_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-next" onclick="scrollCarousel('novedades', 1)" id="novedades-next">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Todas las Películas y Series -->
+    <section class="movie-section">
+        <h2>Todas las Películas y Series</h2>
+        <div class="movie-grid-4">
+            {% for item in items %}
+            <div class="movie-card">
+                <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                <div class="overlay">
+                    <p>{{ item.title }}</p>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'toggle_favorite_movie' item.id %}" class="action-link">
+                        {% if item.id in favorite_ids %}
+                            Quitar de Mi Lista
+                        {% else %}
+                            Añadir a Mi Lista
+                        {% endif %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'streaming/js/carousel.js' %}"></script>
+{% endblock %}

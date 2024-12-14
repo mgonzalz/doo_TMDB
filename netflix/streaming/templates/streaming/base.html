@@ -11,7 +11,7 @@
     <header>
         <nav>
             <div>
-                <a href="#" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+                <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
                 <a href="#" class="{% if request.resolver_match.url_name == 'genre' %}active{% endif %}">Genre</a>
                 <a href="#" class="{% if request.resolver_match.url_name == 'country' %}active{% endif %}">Country</a>
             </div>

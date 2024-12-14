@@ -3,7 +3,8 @@ from . import views
 
 # Create your urls here.
 urlpatterns = [
-    path('', views.movie_list, name='movie_list'),
+    path('', views.home, name='home'),
+    path('movies/', views.movie_list, name='movie_list'),
     path('favorite-movie/<int:movie_id>/', views.toggle_favorite_movie, name='toggle_favorite_movie'),
     # Endpoints para Movies
     path('api/movies/', views.MovieListView.as_view(), name='movie-list-api'),
