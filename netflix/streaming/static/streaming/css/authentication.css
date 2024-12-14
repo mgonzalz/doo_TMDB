@@ -1,24 +1,15 @@
-/* Form Containers */
-.password-form,
-.register-form,
-.login-form {
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: #222;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Form Groups */
+/* General Form Styles */
 .form-group {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 5px;
     color: white;
+    font-weight: bold;
 }
 
 .form-group input {
@@ -28,11 +19,16 @@
     border-radius: 4px;
     background-color: #1a1a1a;
     color: white;
+    box-sizing: border-box;
 }
 
-/* Form Actions */
+.form-group input[type="file"] {
+    padding: 5px;
+}
+
 .form-actions {
     text-align: center;
+    margin-top: 20px;
 }
 
 /* Buttons */
@@ -49,6 +45,72 @@
 
 .btn:hover {
     background-color: #e63232;
+}
+
+/* Containers */
+.profile-form,
+.password-form,
+.register-form,
+.login-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-completed {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Profile Information */
+.profile-info-list {
+    list-style: none;
+    padding: 0;
+    color: white;
+    flex: 1;
+}
+
+.profile-info-list li {
+    margin-bottom: 15px;
+}
+
+.filled-field {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.empty-field {
+    color: #ff3d3d;
+    font-style: italic;
+}
+
+.avatar-preview {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.avatar-small {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
 }
 
 /* Links */

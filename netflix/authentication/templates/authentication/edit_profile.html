@@ -3,22 +3,200 @@
 {% block title %}Editar Perfil{% endblock %}
 
 {% block content %}
-<h1>Editar Perfil</h1>
-{% if status == 'ok' %}
-    <p style="color: green;">¡Cambios hechos!</p>
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="birth_date">Fecha de Nacimiento:</label>
-    <input type="date" id="birth_date" name="birth_date" value="{{ profile.birth_date|date:'Y-m-d' }}">
-    <br>
-    <label for="avatar">Avatar:</label>
-    <input type="file" id="avatar" name="avatar">
-    <br>
-    <button type="submit">Guardar Cambios</button>
-</form>
-<p><a href="{% url 'change_password' %}">Cambiar Contraseña</a></p>
-<p><a href="{% url 'logout' %}">Cerrar Sesión</a></p>
-<p><a href="{% url 'movie_list' %}">Volver al Home</a></p>
-{% endblock %}
+<main class="movie-list-container">
+    <h1 class="section-title">Editar Perfil</h1>
+    {% if status == 'ok' %}
+        <p class="success-message">¡Cambios hechos!</p>
+    {% endif %}
 
+    <!-- Campos ya completados -->
+    <section class="profile-completed">
+        <h2 class="section-title" style="text-align: center;">Información Actual</h2>
+        <div class="profile-info-container">
+            <ul class="profile-info-list">
+                <li>
+                    <strong>Nombre de Usuario:</strong> 
+                    <span class="filled-field">{{ profile.user.username }}</span>
+                </li>
+                <li>
+                    <strong>Fecha de Nacimiento:</strong> 
+                    {% if profile.birth_date %}
+                        <span class="filled-field">{{ profile.birth_date }}</span>
+                    {% else %}
+                        <span class="empty-field">No especificada</span>
+                    {% endif %}
+                </li>
+                <li>
+                    <strong>Avatar:</strong> 
+                    {% if profile.avatar %}
+                        <span class="filled-field">Ya tienes un avatar subido.</span>
+                    {% else %}
+                        <span class="empty-field">No hay avatar subido.</span>
+                    {% endif %}
+                </li>
+            </ul>
+            <div class="avatar-preview">
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" alt="Avatar Actual" class="avatar-small">
+                {% else %}
+                    <img src="{% static 'authentication/default.png' %}" alt="Avatar por defecto" class="avatar-small">
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario para editar el perfil -->
+    <form method="post" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="birth_date">Fecha de Nacimiento:</label>
+            <input type="date" id="birth_date" name="birth_date" value="{{ profile.birth_date|date:'Y-m-d' }}">
+        </div>
+        <div class="form-group">
+            <label for="avatar">Avatar:</label>
+            <input type="file" id="avatar" name="avatar">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </div>
+    </form>
+
+    <!-- Enlaces adicionales -->
+    <div class="profile-links">
+        <p><a href="{% url 'change_password' %}" class="action-link">Cambiar Contraseña</a></p>
+        <p><a href="{% url 'logout' %}" class="action-link">Cerrar Sesión</a></p>
+        <p><a href="{% url 'movie_list' %}" class="action-link">Volver al Home</a></p>
+    </div>
+</main>
+
+<style>
+    .profile-form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #222;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile-completed {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #333;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .profile-info-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .profile-info-list {
+        list-style: none;
+        padding: 0;
+        color: white;
+        flex: 1;
+    }
+
+    .profile-info-list li {
+        margin-bottom: 15px;
+    }
+
+    .filled-field {
+        color: #00ff00;
+        font-weight: bold;
+    }
+
+    .empty-field {
+        color: #ff3d3d;
+        font-style: italic;
+    }
+
+    .avatar-preview {
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .avatar-small {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 5px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .form-group input[type="date"],
+    .form-group input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #1a1a1a;
+        color: white;
+        box-sizing: border-box;
+    }
+
+    .form-group input[type="file"] {
+        padding: 5px;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #ff3d3d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #e63232;
+    }
+
+    .profile-links {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .profile-links a {
+        color: #ff3d3d;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .profile-links a:hover {
+        text-decoration: underline;
+    }
+
+    .success-message {
+        color: green;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock %}
