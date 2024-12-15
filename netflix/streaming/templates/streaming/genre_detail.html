@@ -1,35 +1,67 @@
 {% extends 'streaming/base.html' %}
-
+{% load static %}
 {% block title %}{{ genre }}{% endblock %}
 
 {% block content %}
-<main class="genre-detail-container">
+<main class="movie-list-container">
     <h1 class="section-title">Género: {{ genre }}</h1>
 
+    <!-- Sección de Películas -->
     <section class="movie-section">
-        <h2>Películas</h2>
-        <ul class="movie-list">
+        <h2 class="section-subtitle">Películas</h2>
+        <div class="movie-grid movie-grid-5">
             {% for movie in movies %}
-            <li class="movie-item">
+            <div class="movie-card">
                 <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
-                <h3>{{ movie.title }}</h3>
-                <p>{{ movie.description }}</p>
-            </li>
+                <div class="overlay">
+                    <h3>{{ movie.title }}</h3>
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
+                            {% if movie.id in favorite_movie_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </section>
 
-    <section class="tvshow-section">
-        <h2>Series</h2>
-        <ul class="tvshow-list">
+    <!-- Sección de Series -->
+    <section class="movie-section">
+        <h2 class="section-subtitle">Series</h2>
+        <div class="movie-grid movie-grid-5">
             {% for tv_show in tv_shows %}
-            <li class="tvshow-item">
+            <div class="movie-card">
                 <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
-                <h3>{{ tv_show.title }}</h3>
-                <p>{{ tv_show.description }}</p>
-            </li>
+                <div class="overlay">
+                    <h3>{{ tv_show.title }}</h3>
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">
+                            {% if tv_show.id in favorite_tvshow_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </section>
 </main>
+<style>
+    /* Grilla con 5 columnas */
+    .movie-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+        gap: 20px; /* Espacio entre tarjetas */
+        margin-top: 20px;
+    }
+</style>
+
 {% endblock %}

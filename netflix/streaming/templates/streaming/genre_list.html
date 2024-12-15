@@ -1,16 +1,16 @@
 {% extends 'streaming/base.html' %}
-
+{% load static %}
 {% block title %}Lista de Géneros{% endblock %}
 
 {% block content %}
-<main class="genre-list-container">
+<main class="movie-list-container">
     <h1 class="section-title">Géneros</h1>
-    <ul class="genre-list">
+    <div class="genre-grid">
         {% for genre in genres %}
-        <li class="genre-item">
-            <a href="{% url 'genre_detail' genre %}">{{ genre }}</a>
-        </li>
+        <div class="genre-card">
+            <a href="{% url 'genre_detail' genre %}" class="genre-link">{{ genre }}</a>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </main>
 {% endblock %}
