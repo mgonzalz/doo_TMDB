@@ -26,11 +26,17 @@ def fetch_movies():
     endpoint_genres = 'genre/movie/list'
     endpoint = 'movie/popular'
     genre_dict = {g['id']: g['name'] for g in fetch_data_from_api(endpoint_genres).get('genres', [])}
-    response = fetch_data_from_api(endpoint)
-    for movie in response.get('results', []):
-        # Mapear géneros usando el diccionario
-        movie['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in movie.get('genre_ids', [])]
-    return response.get('results', [])
+    all_movies = []
+    for page in range(1, 101):
+        try:
+            response = fetch_data_from_api(endpoint, params={'page': page})
+            for movie in response.get('results', []):
+                # Mapear géneros usando el diccionario
+                movie['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in movie.get('genre_ids', [])]
+                all_movies.append(movie)
+        except Exception as e:
+            print(f"Error al obtener la página {page}: {e}")
+    return all_movies
 
 
 def fetch_tv_shows():
@@ -40,7 +46,13 @@ def fetch_tv_shows():
     endpoint_genres = 'genre/tv/list'
     endpoint = 'tv/popular'
     genre_dict = {g['id']: g['name'] for g in fetch_data_from_api(endpoint_genres).get('genres', [])}
-    response = fetch_data_from_api(endpoint)
-    for tv_show in response.get('results', []):
-        tv_show['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in tv_show.get('genre_ids', [])]
-    return response.get('results', [])
+    all_tv = []
+    for page in range(1, 101):
+        try:
+            response = fetch_data_from_api(endpoint, params={'page': page})
+            for tv_show in response.get('results', []):
+                tv_show['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in tv_show.get('genre_ids', [])]
+                all_tv.append(tv_show)
+        except Exception as e:
+            print(f"Error al obtener la página {page}: {e}")
+    return all_tv
