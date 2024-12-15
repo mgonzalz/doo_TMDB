@@ -1,0 +1,35 @@
+{% extends 'streaming/base.html' %}
+
+{% block title %}{{ genre }}{% endblock %}
+
+{% block content %}
+<main class="genre-detail-container">
+    <h1 class="section-title">Género: {{ genre }}</h1>
+
+    <section class="movie-section">
+        <h2>Películas</h2>
+        <ul class="movie-list">
+            {% for movie in movies %}
+            <li class="movie-item">
+                <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="tvshow-section">
+        <h2>Series</h2>
+        <ul class="tvshow-list">
+            {% for tv_show in tv_shows %}
+            <li class="tvshow-item">
+                <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                <h3>{{ tv_show.title }}</h3>
+                <p>{{ tv_show.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+{% endblock %}

@@ -3,7 +3,7 @@ from streaming.models import TVShow
 from streaming.utils import fetch_tv_shows
 
 class Command(BaseCommand):
-    help = "Importa las series populares desde TMDb y las guarda en la base de datos."
+    help = "Import TV Shows from TMDB."
 
     def handle(self, *args, **kwargs):
         try:
@@ -18,7 +18,7 @@ class Command(BaseCommand):
                         'title': show.get('name', 'Título desconocido'),
                         'description': show.get('overview', ''),
                         'release_date': show.get('first_air_date', None),
-                        'genre': ', '.join(map(str, show.get('genre_ids', []))),
+                        'genre': ', '.join(show.get('genres', [])),
                         'vote_average': show.get('vote_average', 0),
                         'poster_path': f"https://image.tmdb.org/t/p/w500{show.get('poster_path', '')}",
                         'backdrop_path': f"https://image.tmdb.org/t/p/w500{show.get('backdrop_path', '')}",

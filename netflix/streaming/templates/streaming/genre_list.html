@@ -1,0 +1,16 @@
+{% extends 'streaming/base.html' %}
+
+{% block title %}Lista de Géneros{% endblock %}
+
+{% block content %}
+<main class="genre-list-container">
+    <h1 class="section-title">Géneros</h1>
+    <ul class="genre-list">
+        {% for genre in genres %}
+        <li class="genre-item">
+            <a href="{% url 'genre_detail' genre %}">{{ genre }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

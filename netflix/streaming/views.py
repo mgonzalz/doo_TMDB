@@ -104,6 +104,35 @@ def search_results(request):
         'tv_shows': tv_shows,
     })
 
+def genre_list(request):
+    movie_genres = Movie.objects.values_list('genre', flat=True)
+    tv_show_genres = TVShow.objects.values_list('genre', flat=True)
+
+    all_genres = set()
+    for genre in movie_genres:
+        if genre:
+            all_genres.update([g.strip() for g in genre.split(",")])
+    for genre in tv_show_genres:
+        if genre:
+            all_genres.update([g.strip() for g in genre.split(",")])
+
+    filtered_genres = sorted(g for g in all_genres if g.isalpha()) # Filtrar géneros numéricos.
+
+    return render(request, 'streaming/genre_list.html', {
+        'genres': sorted(filtered_genres),
+    })
+
+
+def genre_detail(request, genre):
+    movies = Movie.objects.filter(genre__icontains=genre)
+    tv_shows = TVShow.objects.filter(genre__icontains=genre)
+
+    return render(request, 'streaming/genre_detail.html', {
+        'genre': genre,
+        'movies': movies,
+        'tv_shows': tv_shows,
+    })
+
 # Endpoints para agregar o eliminar de favoritos.
 @login_required
 def toggle_favorite_movie(request, movie_id):

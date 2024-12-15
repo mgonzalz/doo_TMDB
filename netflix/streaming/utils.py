@@ -21,16 +21,26 @@ def fetch_data_from_api(endpoint, params=None, language='es-ES'):
 
 def fetch_movies():
     """
-    Obtiene una lista de películas populares desde el endpoint 'movie/popular'.
+    Obtiene una lista de películas populares desde el endpoint 'movie/popular' y traduce los géneros.
     """
+    endpoint_genres = 'genre/movie/list'
     endpoint = 'movie/popular'
+    genre_dict = {g['id']: g['name'] for g in fetch_data_from_api(endpoint_genres).get('genres', [])}
     response = fetch_data_from_api(endpoint)
+    for movie in response.get('results', []):
+        # Mapear géneros usando el diccionario
+        movie['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in movie.get('genre_ids', [])]
     return response.get('results', [])
+
 
 def fetch_tv_shows():
     """
     Obtiene una lista de series populares desde el endpoint 'tv/popular' sin paginación.
     """
+    endpoint_genres = 'genre/tv/list'
     endpoint = 'tv/popular'
+    genre_dict = {g['id']: g['name'] for g in fetch_data_from_api(endpoint_genres).get('genres', [])}
     response = fetch_data_from_api(endpoint)
+    for tv_show in response.get('results', []):
+        tv_show['genres'] = [genre_dict.get(g_id, "Desconocido") for g_id in tv_show.get('genre_ids', [])]
     return response.get('results', [])

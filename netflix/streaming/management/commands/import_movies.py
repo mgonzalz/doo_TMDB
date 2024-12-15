@@ -3,7 +3,7 @@ from streaming.models import Movie
 from streaming.utils import fetch_movies
 
 class Command(BaseCommand):
-    help = "Import movies from TMDB"
+    help = "Import movies from TMDB."
 
     def handle(self, *args, **kwargs):
         try:
@@ -18,7 +18,7 @@ class Command(BaseCommand):
                         'title': movie.get('title', 'Título desconocido'),
                         'description': movie.get('overview', ''),
                         'release_date': movie.get('release_date', None),
-                        'genre': ', '.join(map(str, movie.get('genre_ids', []))),
+                        'genre': ', '.join(movie.get('genres', [])),
                         'vote_average': movie.get('vote_average', 0),
                         'poster_path': f"https://image.tmdb.org/t/p/w500{movie.get('poster_path', '')}",
                         'backdrop_path': f"https://image.tmdb.org/t/p/w500{movie.get('backdrop_path', '')}",
