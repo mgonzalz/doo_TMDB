@@ -27,12 +27,15 @@ if os.getenv('VERCEL') is None and os.getenv('GITHUB_ACTIONS') is None:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 TMDB_API_KEY = os.getenv('TMDB_API_KEY', '')
+# Verifica si todas las variables están definidas
+if not all([TMDB_API_KEY, SECRET_KEY]):
+    raise ValueError("Faltan variables de entorno necesarias para la configuración de Django.")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -61,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "netflix.urls"
@@ -81,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "netflix.wsgi.application"
+WSGI_APPLICATION = "netflix.wsgi.app"
 
 
 # Database
@@ -130,7 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files (User uploaded files)
 # https://docs.djangoproject.com/en/5.1/topics/files/
 

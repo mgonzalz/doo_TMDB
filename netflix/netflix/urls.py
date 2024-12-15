@@ -26,5 +26,9 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
 ]
 
+# Archivos estáticos
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Archivos de medios (solo en desarrollo)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
