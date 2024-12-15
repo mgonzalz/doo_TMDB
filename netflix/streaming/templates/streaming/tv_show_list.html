@@ -17,11 +17,13 @@
                 {% for tv_show in tv_shows %}
                     {% if tv_show.id in favorite_tvshow_ids %}
                     <div class="movie-card">
+                        <a href="{% url 'tv_show_details' tv_show.id %}">
                         <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
                         <div class="overlay">
                             <p>{{ tv_show.title }}</p>
                             <a href="{% url 'toggle_favorite_tvshow' tv_show.id %}" class="action-link">Quitar de Mi Lista</a>
                         </div>
+                        </a>
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -41,6 +43,7 @@
                 <div class="movie-card top10-card">
                     <div class="rank">{{ forloop.counter }}</div>
                     <div class="rank-overlay"></div>
+                    <a href="{% url 'tv_show_details' tv_show.id %}">
                     <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
                     <div class="overlay">
                         <p>{{ tv_show.title }}</p>
@@ -54,6 +57,7 @@
                         </a>
                         {% endif %}
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -69,6 +73,7 @@
             <div class="carousel" id="novedades">
                 {% for tv_show in new_tvshows %}
                 <div class="movie-card">
+                    <a href="{% url 'tv_show_details' tv_show.id %}">
                     <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
                     <div class="overlay">
                         <p>{{ tv_show.title }}</p>
@@ -82,6 +87,7 @@
                         </a>
                         {% endif %}
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -95,6 +101,7 @@
         <div class="movie-grid-4">
             {% for tv_show in tv_shows %}
             <div class="movie-card">
+                <a href="{% url 'tv_show_details' tv_show.id %}">
                 <img src="{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
                 <div class="overlay">
                     <p>{{ tv_show.title }}</p>
@@ -108,6 +115,7 @@
                     </a>
                     {% endif %}
                 </div>
+                </a>
             </div>
             {% endfor %}
         </div>

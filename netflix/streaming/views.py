@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import JsonResponse
 from rest_framework.views import APIView
@@ -131,6 +131,26 @@ def genre_detail(request, genre):
         'genre': genre,
         'movies': movies,
         'tv_shows': tv_shows,
+    })
+
+def movie_details(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    # Procesar los géneros para excluir los que son números
+    genres = movie.genre.split(", ") if movie.genre else []
+    filtered_genres = [g for g in genres if not g.isdigit()]
+    return render(request, 'streaming/base_details.html', {
+        'item': movie,
+        'genres': filtered_genres,
+    })
+
+def tv_show_details(request, tvshow_id):
+    tv_show = get_object_or_404(TVShow, id=tvshow_id)
+    # Procesar los géneros para excluir los que son números
+    genres = tv_show.genre.split(", ") if tv_show.genre else []
+    filtered_genres = [g for g in genres if not g.isdigit()]
+    return render(request, 'streaming/base_details.html', {
+        'item': tv_show,
+        'genres': filtered_genres,
     })
 
 # Endpoints para agregar o eliminar de favoritos.

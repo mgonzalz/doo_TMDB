@@ -294,3 +294,30 @@ footer {
     color: #ff3d3d;
     text-decoration: underline;
 }
+
+
+/* Estilos generales para enlaces dentro del overlay */
+.overlay a {
+    color: inherit; /* Hereda el color del contenedor */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: normal; /* Evita que otros estilos modifiquen el peso */
+}
+
+.overlay a:hover {
+    color: inherit; /* Sin cambios de color en hover */
+    text-decoration: none;
+}
+
+/* Estilos específicos para el enlace de Añadir/Quitar a Mi Lista */
+.overlay .action-link {
+    color: #ff3d3d; /* Rojo específico para la acción */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.overlay .action-link:hover {
+    color: #e63232; /* Cambio a un rojo más oscuro */
+    text-decoration: underline;
+}

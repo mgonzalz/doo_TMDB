@@ -17,11 +17,13 @@
                 {% for movie in movies %}
                     {% if movie.id in favorite_movie_ids %}
                     <div class="movie-card">
+                        <a href="{% url 'movie_details' movie.id %}">
                         <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                         <div class="overlay">
                             <p>{{ movie.title }}</p>
                             <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">Quitar de Mi Lista</a>
                         </div>
+                        </a>
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -40,6 +42,7 @@
                 {% for movie in top_movies %}
                 <div class="movie-card top10-card">
                     <div class="rank">{{ forloop.counter }}</div>
+                    <a href="{% url 'movie_details' movie.id %}">
                     <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="overlay">
                         <p>{{ movie.title }}</p>
@@ -53,6 +56,7 @@
                         </a>
                         {% endif %}
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -70,14 +74,16 @@
                 <div class="movie-card">
                     <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="overlay">
-                        <p>{{ movie.title }}</p>
-                        {% if request.user.is_authenticated %}
-                        <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
-                            {% if movie.id in favorite_movie_ids %}
-                                Quitar de Mi Lista
-                            {% else %}
-                                Añadir a Mi Lista
-                            {% endif %}
+                        <a href="{% url 'movie_details' movie.id %}">
+                            <p>{{ movie.title }}</p>
+                            {% if request.user.is_authenticated %}
+                            <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
+                                {% if movie.id in favorite_movie_ids %}
+                                    Quitar de Mi Lista
+                                {% else %}
+                                    Añadir a Mi Lista
+                                {% endif %}
+                            </a>
                         </a>
                         {% endif %}
                     </div>
@@ -96,16 +102,18 @@
             <div class="movie-card">
                 <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                 <div class="overlay">
-                    <p>{{ movie.title }}</p>
-                    {% if request.user.is_authenticated %}
-                    <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
-                        {% if movie.id in favorite_movie_ids %}
-                            Quitar de Mi Lista
-                        {% else %}
-                            Añadir a Mi Lista
+                    <a href="{% url 'movie_details' movie.id %}">
+                        <p>{{ movie.title }}</p>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
+                            {% if movie.id in favorite_movie_ids %}
+                                Quitar de Mi Lista
+                            {% else %}
+                                Añadir a Mi Lista
+                            {% endif %}
+                        </a>
                         {% endif %}
                     </a>
-                    {% endif %}
                 </div>
             </div>
             {% endfor %}
