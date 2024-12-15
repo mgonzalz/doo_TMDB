@@ -298,19 +298,19 @@ footer {
 
 /* Estilos generales para enlaces dentro del overlay */
 .overlay a {
-    color: inherit; /* Hereda el color del contenedor */
-    text-decoration: none; /* Elimina el subrayado */
-    font-weight: normal; /* Evita que otros estilos modifiquen el peso */
+    color: inherit; 
+    text-decoration: none;
+    font-weight: normal;
 }
 
 .overlay a:hover {
-    color: inherit; /* Sin cambios de color en hover */
+    color: inherit;
     text-decoration: none;
 }
 
 /* Estilos específicos para el enlace de Añadir/Quitar a Mi Lista */
 .overlay .action-link {
-    color: #ff3d3d; /* Rojo específico para la acción */
+    color: #ff3d3d;
     font-weight: bold;
     margin-top: 10px;
     display: block;
@@ -318,6 +318,107 @@ footer {
 }
 
 .overlay .action-link:hover {
-    color: #e63232; /* Cambio a un rojo más oscuro */
+    color: #e63232; 
     text-decoration: underline;
+}
+
+
+/* Contenedor principal */
+.details-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Cabecera de detalles */
+.details-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Imagen del póster */
+.details-poster {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Información de detalles */
+
+.details-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.details-info p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+/* Descripción */
+.details-description {
+    margin-top: 30px;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.details-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.details-header {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.details-poster {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.details-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.details-info p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.details-description-inline {
+    margin-top: 15px;
+    background-color: #222;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

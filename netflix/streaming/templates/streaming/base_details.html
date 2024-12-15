@@ -4,11 +4,11 @@
 {% block title %}{{ item.title }}{% endblock %}
 
 {% block content %}
-<div class="details-container">
+<main class="details-container">
     <div class="details-header">
         <img src="{{ item.poster_path }}" alt="{{ item.title }}" class="details-poster">
         <div class="details-info">
-            <h1>{{ item.title }}</h1>
+            <h1 class="details-title">{{ item.title }}</h1>
             <p><strong>Calificación:</strong> {{ item.vote_average }}</p>
             <p><strong>Fecha de lanzamiento:</strong> {{ item.release_date }}</p>
             {% if genres %}
@@ -16,12 +16,13 @@
             {% else %}
                 <p><strong>Géneros:</strong> No disponible</p>
             {% endif %}
-
+            <!-- Bloque de Descripción -->
+            <div class="details-description-inline">
+                <h2 class="section-subtitle">Descripción</h2>
+                <p>{{ item.description }}</p>
+            </div>
         </div>
     </div>
-    <div class="details-description">
-        <h2>Descripción</h2>
-        <p>{{ item.description }}</p>
-    </div>
-</div>
+</main>
 {% endblock %}
+

@@ -16,7 +16,9 @@
             <div class="carousel" id="mi-lista">
                 {% for item in my_list %}
                 <div class="movie-card">
-                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <a href="{% if item.type == 'movie' %}{% url 'movie_details' item.id %}{% else %}{% url 'tv_show_details' item.id %}{% endif %}">
+                        <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    </a>
                     <div class="overlay">
                         <p>{{ item.title }}</p>
                         {% if item.type == "movie" %}
@@ -42,7 +44,9 @@
                 {% for item in top_combined %}
                 <div class="movie-card top10-card">
                     <div class="rank">{{ forloop.counter }}</div>
-                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <a href="{% if item.type == 'movie' %}{% url 'movie_details' item.id %}{% else %}{% url 'tv_show_details' item.id %}{% endif %}">
+                        <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    </a>
                     <div class="overlay">
                         <p>{{ item.title }}</p>
                         {% if request.user.is_authenticated %}
@@ -80,7 +84,9 @@
             <div class="carousel" id="novedades">
                 {% for item in new_combined %}
                 <div class="movie-card">
-                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    <a href="{% if item.type == 'movie' %}{% url 'movie_details' item.id %}{% else %}{% url 'tv_show_details' item.id %}{% endif %}">
+                        <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                    </a>
                     <div class="overlay">
                         <p>{{ item.title }}</p>
                         {% if request.user.is_authenticated %}
@@ -116,7 +122,9 @@
         <div class="movie-grid-4">
             {% for item in items %}
             <div class="movie-card">
-                <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                <a href="{% if item.type == 'movie' %}{% url 'movie_details' item.id %}{% else %}{% url 'tv_show_details' item.id %}{% endif %}">
+                    <img src="{{ item.poster_path }}" alt="{{ item.title }}">
+                </a>
                 <div class="overlay">
                     <p>{{ item.title }}</p>
                     {% if request.user.is_authenticated %}
@@ -147,4 +155,3 @@
 
 <script src="{% static 'streaming/js/carousel.js' %}"></script>
 {% endblock %}
-

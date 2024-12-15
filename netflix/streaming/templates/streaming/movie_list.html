@@ -72,9 +72,9 @@
             <div class="carousel" id="novedades">
                 {% for movie in new_movies %}
                 <div class="movie-card">
+                    <a href="{% url 'movie_details' movie.id %}">
                     <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="overlay">
-                        <a href="{% url 'movie_details' movie.id %}">
                             <p>{{ movie.title }}</p>
                             {% if request.user.is_authenticated %}
                             <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
@@ -84,9 +84,9 @@
                                     Añadir a Mi Lista
                                 {% endif %}
                             </a>
-                        </a>
                         {% endif %}
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -100,9 +100,9 @@
         <div class="movie-grid-4">
             {% for movie in movies %}
             <div class="movie-card">
+                <a href="{% url 'movie_details' movie.id %}">
                 <img src="{{ movie.poster_path }}" alt="{{ movie.title }}">
                 <div class="overlay">
-                    <a href="{% url 'movie_details' movie.id %}">
                         <p>{{ movie.title }}</p>
                         {% if request.user.is_authenticated %}
                         <a href="{% url 'toggle_favorite_movie' movie.id %}" class="action-link">
@@ -113,8 +113,8 @@
                             {% endif %}
                         </a>
                         {% endif %}
-                    </a>
                 </div>
+                </a>
             </div>
             {% endfor %}
         </div>
