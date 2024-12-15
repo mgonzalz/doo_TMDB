@@ -11,16 +11,23 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+if os.getenv('VERCEL') is None and os.getenv('GITHUB_ACTIONS') is None:
+    load_dotenv() # Load environment variables from .env file.
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-a0j&1zu60&_58b%4$pf&f-$s@&vzox=w^r8l)h@dpnqv2e+w!j"
+SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
+TMDB_API_KEY = os.getenv('TMDB_API_KEY', '')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -110,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es"
 
 TIME_ZONE = "UTC"
 

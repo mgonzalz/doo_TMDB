@@ -14,12 +14,14 @@
             <div>
                 <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
                 <a href="{% url 'genre_list' %}" class="{% if request.resolver_match.url_name == 'genre' %}active{% endif %}">Genre</a>
-                <a href="#" class="{% if request.resolver_match.url_name == 'country' %}active{% endif %}">Country</a>
             </div>
             <div class="search">
-                <form action="{% url 'search_results' %}" method="get">
-                    <input type="text" name="q" placeholder="Search movies or series...">
-                    <button type="submit">🔍</button>
+                <form action="{% url 'search_results' %}" method="get" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <input type="text" name="q" placeholder="Search movies or series..." style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 20px; outline: none; background-color: #f9f9f9; color: #333; font-size: 14px;">
+                    <button type="submit"
+                            style="background-color: #fff; border: 1px solid #ccc; border-radius: 50%; padding: 8px 10px; cursor: pointer; font-size: 1.2rem; line-height: 1;">
+                        🔍
+                    </button>
                 </form>
             </div>
             <div>

@@ -1,8 +1,9 @@
 # Description: This file contains the utility functions for the streaming app.
 
 import requests
+from django.conf import settings
 
-API_KEY = "d062936eba756bd8c896a4a6b1f795a4"
+API_KEY = settings.TMDB_API_KEY
 BASE_URL = "https://api.themoviedb.org/3"
 
 def fetch_data_from_api(endpoint, params=None, language='es-ES'):
