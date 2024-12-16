@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  django:
+    image: netflix:0.0.1
+    build: .
+    ports:
+      - "8080:8080"  # Mapeo del puerto, no modificar
+    env_file:
+      - netflix/.env  # Cargar variables de entorno desde el archivo .env
+    volumes:
+      - .:/app  # Mapear el código local al contenedor para desarrollo
+    command: ["python", "netflix/manage.py", "runserver", "0.0.0.0:8080"]
