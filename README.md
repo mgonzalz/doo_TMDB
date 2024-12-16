@@ -2,9 +2,9 @@
 Este proyecto es una aplicación desarrollada en Django que imita algunas funcionalidades básicas de la popular plataforma de streaming Netflix. Los usuarios pueden crear cuentas, buscar películas y series, añadir o quitar títulos de su lista personal ("Mi Lista") y explorar contenidos actualizados periódicamente mediante web scraping automatizado.
 
 **Tecnologías Implementadas:**
-- **Docker**: Infraestructura Contenerizada
-- **Github Actions**: Automatización
-- **Figma**: Diseño UI/UX
+- **Docker**: Infraestructura Contenerizada.
+- **Github Actions**: Automatización.
+- **Figma**: Diseño UI/UX realizado utilizando una plantilla extraída de Figma a través de Builders 
 - **PostgreSQL**: Bases de Datos.
 - **Vercel**: Despliegue en la Nube.
 
@@ -15,7 +15,7 @@ Este proyecto es una aplicación desarrollada en Django que imita algunas funcio
 
 ## Caraterísticas.
 ### Front-End.
-En este caso, el diseño de la interfaz de usuario se ha inspirado en un prototipo creado en **Figma**. Se ha tomado como referencia la maqueta del proyecto [_MOVIE WEBSITE UI DESIGN_](https://www.figma.com/design/ARHPXdX8x3HlKJ1V7GV2il/MOVIE-WEBSITE-UI-DESIGN?node-id=0-1&t=Z7tVJ1fYANWjeOz9-1), lo cual permitió construir una interfaz similar a la de plataformas de streaming modernas.
+En este caso, el diseño de la interfaz de usuario se ha inspirado en un prototipo creado en **Figma**, tomando como referencia la maqueta del proyecto [_MOVIE WEBSITE UI DESIGN_](https://www.figma.com/design/ARHPXdX8x3HlKJ1V7GV2il/MOVIE-WEBSITE-UI-DESIGN?node-id=0-1&t=Z7tVJ1fYANWjeOz9-1). Esta plantilla fue obtenida a través de **Builders**, lo cual permitió construir una interfaz similar a la de las plataformas de streaming modernas.
 
 - **HTML y CSS**: Implementados para estructurar y estilizar la presentación de la aplicación, garantizando una interfaz de usuario intuitiva y agradable.
 - **Django Templates**: Utilizados para la generación dinámica de contenido en las páginas web, permitiendo que los datos de películas y series se integren de manera fluida en el diseño.
