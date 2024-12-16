@@ -1,0 +1,455 @@
+<style>
+  .movie-container {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding: 24px 0 258px;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    margin-left: 29px;
+    width: 100%;
+    max-width: 1050px;
+    gap: 29px;
+    color: #fff;
+    flex-wrap: wrap;
+    font: 600 16px Poppins, sans-serif;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: auto 0;
+  }
+
+  .search-bar {
+    border-radius: 25px;
+    background: #fff;
+    display: flex;
+    gap: 40px;
+    color: #000;
+    font-weight: 400;
+    padding: 12px 25px;
+  }
+
+  .search-input {
+    border: none;
+    background: transparent;
+    width: 100%;
+  }
+
+  .search-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .category-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: auto 0;
+  }
+
+  .user-nav {
+    display: flex;
+    gap: 13px;
+    margin: auto 0;
+  }
+
+  .user-icon {
+    width: 12px;
+    height: 17px;
+    margin-top: 6px;
+  }
+
+  .hero-section {
+    position: relative;
+    min-height: 744px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 321px 80px 19px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 794px;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 44px;
+    color: #fff;
+    font: 700 24px Poppins, sans-serif;
+  }
+
+  .watch-btn {
+    border-radius: 5px;
+    background: #f00;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .watchlist-btn {
+    border-radius: 5px;
+    border: 3px solid #f00;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .movie-title {
+    color: #fff;
+    margin-top: 55px;
+    font: 700 32px Poppins, sans-serif;
+  }
+
+  .genre-tags {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    border-radius: 20px;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    font: 600 16px Poppins, sans-serif;
+  }
+
+  .movie-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font: 500 16px Poppins, sans-serif;
+  }
+
+  .meta-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .movie-description {
+    color: #fff;
+    margin-top: 24px;
+    max-width: 626px;
+    font: 500 16px Poppins, sans-serif;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    margin-top: 72px;
+    width: 100%;
+  }
+
+  .section-title {
+    font: 500 24px Poppins, sans-serif;
+  }
+
+  .view-all-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 600 24px Poppins, sans-serif;
+  }
+
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  .movie-card {
+    position: relative;
+  }
+
+  .movie-poster {
+    width: 100%;
+    aspect-ratio: 0.74;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .movie-info {
+    margin-top: 16px;
+  }
+
+  .movie-card-title {
+    color: #fff;
+    font: 500 16px Poppins, sans-serif;
+  }
+
+  .movie-meta-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .quality-tag {
+    border-radius: 5px;
+    background: #f00;
+    color: #fff;
+    padding: 4px 8px;
+    font: 500 16px Poppins, sans-serif;
+  }
+
+  .duration-tag {
+    border-radius: 5px;
+    border: 1px solid #f00;
+    color: #fff;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 500 16px Poppins, sans-serif;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (max-width: 991px) {
+    .movie-container {
+      padding-bottom: 100px;
+    }
+
+    .nav-wrapper {
+      max-width: 100%;
+    }
+
+    .hero-section {
+      padding: 100px 20px 0;
+    }
+
+    .movie-description {
+      max-width: 100%;
+    }
+
+    .section-header {
+      margin-top: 40px;
+    }
+
+    .movie-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+</style>
+
+<div class="movie-container">
+  <nav class="nav-wrapper">
+    <div class="nav-links">
+      <div class="primary-nav">
+        <a href="#" tabindex="0">Home</a>
+        <a href="#" tabindex="0">Genre</a>
+        <a href="#" tabindex="0">Country</a>
+      </div>
+
+      <form class="search-bar" role="search">
+        <label for="movie-search" class="visually-hidden">Search movies</label>
+        <input
+          type="search"
+          id="movie-search"
+          class="search-input"
+          placeholder="Search movies..."
+          aria-label="Search movies"
+        />
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/181dc9b06ff2e926e065cc276da3cb26f172864a1c625cdeea2a697d40c505dc?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+          alt=""
+          class="search-icon"
+        />
+      </form>
+
+      <div class="category-nav">
+        <a href="#" tabindex="0">Movies</a>
+        <a href="#" tabindex="0">Series</a>
+        <a href="#" tabindex="0">Animation</a>
+      </div>
+    </div>
+
+    <div class="user-nav">
+      <a href="#" tabindex="0">Login/Signup</a>
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/71a57faa3c5813fd35014786aaeebb26049847ed4b94d5e58bea80fd7ec859e8?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+        alt=""
+        class="user-icon"
+      />
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <img
+      src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/4dbee691d57f02a8c3f089bc03eaa4ef2ce8b4ba515a4c3ec2f145d73f070c7c?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+      alt="Avatar: The Way of Water movie backdrop"
+      class="hero-bg"
+    />
+
+    <div class="hero-content">
+      <div class="action-buttons">
+        <button class="watch-btn" tabindex="0">
+          Watch Now
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/f81319d2b842fc7469a9bb3993c16b1cd7d1472a98ec2894cb319e1251330b19?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+            alt=""
+            width="31"
+            height="31"
+          />
+        </button>
+
+        <button class="watchlist-btn" tabindex="0">
+          Watch Later
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/50c66490c69b7371b04ee93bbc34c79a79b76e1a3cbbe5eac1c91758fe2276a1?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+            alt=""
+            width="20"
+            height="20"
+          />
+        </button>
+      </div>
+
+      <h1 class="movie-title">Avatar: The Way of Water</h1>
+
+      <div class="genre-tags">
+        <span class="tag">Action</span>
+        <span class="tag">Adventure</span>
+        <span class="tag">Science Fiction</span>
+
+        <div class="movie-meta">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/22aecba6de8d0f41958d3491bff587a27644f998552e38470fac2eff780c2199?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+            alt=""
+            class="meta-icon"
+          />
+          <span>2022</span>
+        </div>
+
+        <div class="movie-meta">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/ff9e33f18985e6caa3fcf112c9bd384541317cc46c64335764b4da89fe356fe7?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+            alt=""
+            class="meta-icon"
+          />
+          <span>3:12:00</span>
+        </div>
+
+        <div class="movie-meta">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/316cbb9dea80231b896791cffb993d021ba9b5240e65b6483684c61929e447ac?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+            alt=""
+            class="meta-icon"
+          />
+          <span>8.5</span>
+        </div>
+      </div>
+
+      <p class="movie-description">
+        Set more than a decade after the events of the first film, learn the
+        story of the Sully family (Jake, Neytiri, and their kids), the trouble
+        that follows them, the lengths they go to keep each other safe, the
+        battles they fight to stay alive, and the tragedies they endure.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rest of sections following same pattern -->
+  <!-- Recently Updated Section -->
+  <section>
+    <div class="section-header">
+      <h2 class="section-title">Recently Updated</h2>
+    </div>
+
+    <div class="movie-grid">
+      <!-- Movie cards following established pattern -->
+      <article class="movie-card">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/830fd5d74b67b2412725cc6c2a6b2c369a7069e46c5710d6e496971d93a4a800?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+          alt="The Flash Series"
+          class="movie-poster"
+        />
+        <div class="movie-info">
+          <h3 class="movie-card-title">The Flash</h3>
+          <p>Series/S 2/EP 9</p>
+          <p>11/05/23</p>
+        </div>
+      </article>
+
+      <!-- Repeat pattern for other movie cards -->
+    </div>
+  </section>
+
+  <!-- Trending Section -->
+  <section>
+    <div class="section-header">
+      <h2 class="section-title">Trending</h2>
+      <a href="#" class="view-all-link" tabindex="0">
+        View all
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/faca97d324c58f2714bc577658805a10a006b0cc74a2618bf76671555033c84a?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+          alt=""
+          width="22"
+          height="22"
+        />
+      </a>
+    </div>
+
+    <div class="movie-grid">
+      <!-- Movie cards following established pattern -->
+    </div>
+  </section>
+
+  <!-- New Releases Section -->
+  <section>
+    <div class="section-header">
+      <h2 class="section-title">New Release - Movies</h2>
+      <a href="#" class="view-all-link" tabindex="0">
+        View all
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/b89a6281c5f54ec4a4c08383eaaa44b4/faca97d324c58f2714bc577658805a10a006b0cc74a2618bf76671555033c84a?apiKey=b89a6281c5f54ec4a4c08383eaaa44b4&"
+          alt=""
+          width="22"
+          height="22"
+        />
+      </a>
+    </div>
+
+    <div class="movie-grid">
+      <!-- Movie cards following established pattern -->
+    </div>
+  </section>
+</div>
